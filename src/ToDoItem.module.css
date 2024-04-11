@@ -1,0 +1,17 @@
+.container {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 22px;
+  font-size: 14px;
+  min-width: 400px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 4px;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: flex-end;
+  flex: 1;
+}
