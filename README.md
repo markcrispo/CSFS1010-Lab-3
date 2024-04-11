@@ -37,7 +37,7 @@ In order to personalize the task tracker, we'll simulate logging in and changing
 - In `App.jsx`, add a Login button
 - On click, the user should be prompted with "What's your name?"
   - For simplicity we'll use [window.prompt()](https://developer.mozilla.org/en-US/docs/Web/API/Window/prompt)
-- After "signing in", the header should display "Username's Task Tracker" and the button should say "Change user"
+- After signing in, the header should display "Username's Task Tracker" and the button should say "Change user"
 
 Now the important part! **We'll want to reset the Task Tracker whenever the username changes**.
 
