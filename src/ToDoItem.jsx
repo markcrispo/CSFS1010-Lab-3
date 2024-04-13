@@ -1,5 +1,5 @@
 /* eslint-disable  react/prop-types */
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 
 import styles from "./ToDoItem.module.css";
 
@@ -12,8 +12,18 @@ const ToDoItem = ({
 }) => {
   const [isEditing, setIsEditing] = useState(title === "");
   const [isHovering, setIsHovering] = useState(false);
+  const [workingTitle, setWorkingTitle] = useState(title);
 
-  const enabled = title.length > 0;
+  const enabled = workingTitle.length > 0;
+
+  const inputRef = useRef();
+
+  useEffect(() => {
+    if (isEditing) {
+      inputRef.current.focus();
+      // inputRef.current.value = title;
+    }
+  }, [isEditing, title]);
 
   return (
     <div
@@ -30,8 +40,9 @@ const ToDoItem = ({
       {isEditing ? (
         <input
           type="text"
-          value={title}
-          onChange={(event) => setTitle(event.target.value)}
+          value={workingTitle}
+          onChange={(event) => setWorkingTitle(event.target.value)}
+          ref={inputRef}
         />
       ) : (
         <div>{title}</div>
@@ -39,7 +50,16 @@ const ToDoItem = ({
 
       {(isHovering || isEditing) && (
         <div className={styles.buttonContainer}>
-          <button onClick={() => setIsEditing(!isEditing)} disabled={!enabled}>
+          <button
+            onClick={() => {
+              if (isEditing) {
+                // setTitle(inputRef.current.value);
+                setTitle(workingTitle);
+              }
+              setIsEditing(!isEditing);
+            }}
+            disabled={!enabled}
+          >
             {isEditing ? "Save" : "Edit"}
           </button>
           <button onClick={handleRemove}>Remove</button>
